@@ -1,9 +1,23 @@
 //
 import 'package:flutter/material.dart';
 
-void main() => runApp(Boton1());
+main() {
+  runApp(
+    Boton1(),
+  );
+}
 
-class Boton1 extends StatelessWidget {
+class Boton1 extends StatefulWidget {
+  Boton1({Key? key}) : super(key: key); //valor nulo
+
+  @override
+  _MyAppState createState() => _MyAppState();
+}
+
+class _MyAppState extends State<Boton1> {
+  var city = ['Toronto', 'Boston', 'Mexico', 'London'];
+  var firstcity = 'Toronto';
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -14,6 +28,35 @@ class Boton1 extends StatelessWidget {
         body: SafeArea(
           child: Column(
             children: <Widget>[
+              ButtonBar(
+                alignment: MainAxisAlignment.center,
+                children: [
+                  OutlineButton(
+                    shape: StadiumBorder(),
+                    highlightedBorderColor: Colors.blue,
+                    child: Text('Flights'),
+                    onPressed: () {},
+                  ),
+                  OutlineButton(
+                    shape: StadiumBorder(),
+                    highlightedBorderColor: Colors.blue,
+                    child: Text('Hotels'),
+                    onPressed: () {},
+                  ),
+                  OutlineButton(
+                    shape: StadiumBorder(),
+                    highlightedBorderColor: Colors.blue,
+                    child: Text('Cars'),
+                    onPressed: () {},
+                  ),
+                ],
+              ),
+              OutlineButton(
+                shape: StadiumBorder(),
+                highlightColor: Colors.blue,
+                child: Text('Outline Button'),
+                onPressed: () {},
+              ),
               Center(
                 child: SafeArea(
                   child: Text(
@@ -57,6 +100,22 @@ class Boton1 extends StatelessWidget {
                   "Flat Button",
                   style: TextStyle(fontSize: 20.0),
                 ),
+              ),
+              // Start the Code of DropdownButton //
+              DropdownButton<String>(
+                items: city.map((String dropDownStringItem) {
+                  return DropdownMenuItem<String>(
+                    value: dropDownStringItem,
+                    child: Text(dropDownStringItem),
+                  );
+                }).toList(),
+                onChanged: (String? NewValue) {
+                  //error al compilar
+                  setState(() {
+                    this.firstcity = NewValue!;
+                  });
+                },
+                value: firstcity,
               ),
             ],
           ),
